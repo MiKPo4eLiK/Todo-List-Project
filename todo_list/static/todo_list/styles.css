@@ -18,7 +18,6 @@ body {
     margin: 20px;
 }
 
-/* Sidebar styles */
 .sidebar {
     width: 200px;
     padding: 20px;
@@ -137,22 +136,26 @@ h1, h2, h3 {
 .action-btn.complete {
     background-color: #2ecc71;
 }
+
 .action-btn.complete:hover {
     background-color: #27ae60;
 }
+
 .action-btn.undo {
     background-color: #f1c40f;
 }
+
 .action-btn.undo:hover {
     background-color: #f39c12;
 }
+
 .action-btn.delete {
     background-color: #e74c3c;
 }
+
 .action-btn.delete:hover {
     background-color: #c0392b;
 }
-
 
 .action-btn:hover {
     background-color: #95a5a6;
