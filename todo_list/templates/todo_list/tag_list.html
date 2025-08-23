@@ -1,0 +1,27 @@
+{% extends "todo_list/base.html" %}
+
+{% block content %}
+    <div class="list-container">
+        <h1>Теги</h1>
+
+        <div class="add-task">
+            <a href="{% url 'todo_list:tag-create' %}">Add tag</a>
+        </div>
+
+        {% if tags %}
+            {% for tag in tags %}
+            <div class="task-card">
+                <div class="task-header">
+                    <span class="task-title">{{ tag.name }}</span>
+                </div>
+                <div class="task-actions" style="margin-top: 10px;">
+                    <a href="{% url 'todo_list:tag-update' pk=tag.pk %}" class="btn">Update</a>
+                    <a href="{% url 'todo_list:tag-delete' pk=tag.pk %}" class="btn">Delete</a>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p>No tags yet.</p>
+        {% endif %}
+    </div>
+{% endblock %}

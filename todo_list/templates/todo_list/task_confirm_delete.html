@@ -1,0 +1,25 @@
+{% extends 'todo_list/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="main-container">
+        <aside class="sidebar">
+            <a href="{% url 'todo_list:index' %}" class="sidebar-link">Home</a>
+            <a href="#" class="sidebar-link">Tags</a>
+        </aside>
+
+        <main class="content-area">
+            <h1>Delete Task</h1>
+            <div class="delete-confirm">
+                <p>Are you sure you want to delete the task "{{ object.content }}"?</p>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="form-actions">
+                        <button type="submit" class="btn action-btn delete">Confirm</button>
+                        <a href="{% url 'todo_list:index' %}" class="btn action-btn">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+{% endblock %}

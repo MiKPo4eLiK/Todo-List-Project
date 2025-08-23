@@ -1,0 +1,52 @@
+{% extends 'todo_list/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="main-container">
+        <aside class="sidebar">
+            <a href="#" class="sidebar-link active">Home</a>
+            <a href="#" class="sidebar-link">Tags</a>
+        </aside>
+
+        <main class="content-area">
+            <h1>TODO list</h1>
+            <div class="add-task">
+                <a href="{% url 'todo_list:task-create' %}" class="btn">Add task</a>
+            </div>
+
+            <div class="list-container">
+                {% for task in tasks %}
+                    <div class="task-card">
+                        <div class="task-body">
+                            <p class="task-title">{{ task.content }}</p>
+                            <p class="task-meta">
+                                Created: {{ task.created_datetime|date:"M d, Y" }}, {{ task.created_datetime|date:"g:i p" }}
+                                {% if task.deadline_datetime %}
+                                    | Deadline: {{ task.deadline_datetime|date:"M d, Y" }}, {{ task.deadline_datetime|date:"g:i p" }}
+                                {% endif %}
+                            </p>
+                            <p class="task-meta">
+                                Tags:
+                                {% for tag in task.tags.all %}
+                                    <span class="tag">{{ tag.name }}</span>
+                                {% endfor %}
+                            </p>
+                        </div>
+                        <div class="task-actions">
+                            <span class="task-status">
+                                {% if task.is_done %}
+                                    <span class="status-done">Done</span>
+                                {% else %}
+                                    <span class="status-not-done">Not done</span>
+                                {% endif %}
+                            </span>
+                            <a href="{% url 'todo_list:task-toggle' task.pk %}" class="action-btn {% if task.is_done %}undo{% else %}complete{% endif %}">{{ task.is_done|yesno:"Undo,Complete" }}</a>
+                            <a href="{% url 'todo_list:task-update' task.pk %}" class="action-btn">Update</a>
+                            <a href="{% url 'todo_list:task-delete' task.pk %}" class="action-btn">Delete</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </main>
+    </div>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'todo_list/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="main-container">
+        <aside class="sidebar">
+            <a href="{% url 'todo_list:index' %}" class="sidebar-link">Home</a>
+            <a href="#" class="sidebar-link">Tags</a>
+        </aside>
+
+        <main class="content-area">
+            {% if form.instance.pk %}
+                <h1>Update Task</h1>
+            {% else %}
+                <h1>Add Task</h1>
+            {% endif %}
+
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="id_content">Content:</label>
+                    {{ form.content }}
+                </div>
+                <div class="form-group">
+                    <label for="id_deadline_datetime">Deadline datetime:</label>
+                    {{ form.deadline_datetime }}
+                </div>
+                <div class="form-group">
+                    <label>Tags:</label>
+                    {{ form.tags }}
+                </div>
+                <div class="form-group">
+                    <label for="id_is_done">Is done:</label>
+                    {{ form.is_done }}
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn">Save</button>
+                    <a href="{% url 'todo_list:index' %}" class="btn action-btn">Cancel</a>
+                </div>
+            </form>
+        </main>
+    </div>
+{% endblock %}

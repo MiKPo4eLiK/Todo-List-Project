@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Task</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Add Task</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Save">
+        </form>
+        <a href="{% url 'todo_list:index' %}" class="back-link">Back to list</a>
+    </div>
+</body>
+</html>
